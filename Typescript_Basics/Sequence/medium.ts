@@ -1,35 +1,54 @@
-//1. bmi calculate
-import promptSync from 'prompt-sync';
-const prompt = promptSync({});
+import fs from 'fs';
 
-let weight = Number(prompt("Enter weight in kilograms: "));
-let height = Number(prompt("Enter height in meters: "));
+const inputs = fs.readFileSync(0, 'utf8')
+    .trim()
+    .split(/\r?\n/);
+
+let index = 0;
+
+// 1. BMI Calculation
+console.log("Enter weight in kilograms:");
+let weight = Number(inputs[index++]);
+
+console.log("Enter height in meters:");
+let height = Number(inputs[index++]);
 
 let bmi = weight / (height * height);
+
 console.log("BMI:", bmi.toFixed(2));
-console.log("-----------")
+console.log("-----------");
 
-//2.score message
-let score = Number(prompt("Game Score: "));
-console.log("Your score is " + String(score) + ".");
-console.log("-----------")
+// 2. Score Message
+console.log("Game Score:");
+let score = Number(inputs[index++]);
 
-//3.average rating
-let rating = Number(prompt("Average Rating: "));
+console.log("Your score is " + score + ".");
+console.log("-----------");
+
+// 3. Average Rating
+console.log("Average Rating:");
+let rating = Number(inputs[index++]);
+
 console.log("Rounded Rating:", Math.round(rating));
-console.log("-----------")
+console.log("-----------");
 
-//4.list of products
-let products = prompt("Enter product names separated by commas: ");
+// 4. List of Products
+console.log("Enter product names separated by commas:");
+let products = inputs[index++];
+
 let productList = products.split(",");
+
 console.log("List of Products:");
+
 for (let item of productList) {
     console.log(item.trim());
 }
-console.log("-----------")
 
-//5.string
-let str1 = prompt("Enter a string: ");
+console.log("-----------");
+
+// 5. String Operations
+console.log("Enter a string:");
+let str1 = inputs[index++];
 
 console.log(str1.length);
 console.log(str1.repeat(2));
