@@ -3,11 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-//1. Circle
-const prompt_sync_1 = __importDefault(require("prompt-sync"));
-const prompt = (0, prompt_sync_1.default)({});
-let radius = Number(prompt("Enter radius: "));
-let angle = Number(prompt("Enter angle: "));
+const fs_1 = __importDefault(require("fs"));
+const inputs = fs_1.default.readFileSync(0, 'utf8')
+    .trim()
+    .split(/\r?\n/);
+let index = 0;
+// 1. Circle
+let radius = Number(inputs[index++]);
+let angle = Number(inputs[index++]);
 let pi = 3.14159;
 let diameter = 2 * radius;
 let circumference = 2 * pi * radius;
@@ -18,14 +21,16 @@ console.log("Diameter:", diameter);
 console.log("Circumference:", circumference);
 console.log("Sector Area:", sectorArea);
 console.log("Arc Length:", arcLength);
-//2. total cost calculate
-let price = Number(prompt("Enter item price: "));
-let quantity = Number(prompt("Enter quantity: "));
+console.log("-----------");
+// 2. Total Cost Calculation
+let price = Number(inputs[index++]);
+let quantity = Number(inputs[index++]);
 let total = price * quantity;
 console.log("Total cost: $" + total.toFixed(2));
-//3.budget tracking
-let income = Number(prompt("Enter monthly income: "));
-let expenses = prompt("Enter expenses separated by spaces: ");
+console.log("-----------");
+// 3. Budget Tracking
+let income = Number(inputs[index++]);
+let expenses = inputs[index++];
 let list = expenses.split(" ");
 let sum = 0;
 for (let item of list) {
@@ -33,10 +38,11 @@ for (let item of list) {
 }
 let balance = income - sum;
 console.log("Remaining budget: $" + balance.toFixed(2));
-//4. traingle
-let a = Number(prompt("Enter side a: "));
-let b = Number(prompt("Enter side b: "));
-let c = Number(prompt("Enter side c: "));
+console.log("-----------");
+// 4. Triangle Area
+let a = Number(inputs[index++]);
+let b = Number(inputs[index++]);
+let c = Number(inputs[index++]);
 if (a + b > c && b + c > a && a + c > b) {
     let s = (a + b + c) / 2;
     let area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
@@ -45,13 +51,14 @@ if (a + b > c && b + c > a && a + c > b) {
 else {
     console.log("Invalid triangle");
 }
-//5. price calculator
+console.log("-----------");
+// 5. Price Calculator
 let total1 = 0;
-while (true) {
-    let price = Number(prompt("Enter item price: "));
-    let quantity = Number(prompt("Enter quantity: "));
-    total1 = total1 + (price * quantity);
-    let choice = prompt("Do you want to continue yes/no: ");
+while (index < inputs.length) {
+    let itemPrice = Number(inputs[index++]);
+    let itemQuantity = Number(inputs[index++]);
+    total1 += itemPrice * itemQuantity;
+    let choice = inputs[index++].toLowerCase();
     if (choice === "no") {
         break;
     }
