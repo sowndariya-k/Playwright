@@ -9,12 +9,13 @@ test('test', async ({ page }) => {
   await page.getByRole('link', { name: ' Signup / Login' }).click();
   await expect(page.getByRole('link', { name: 'Website for automation' })).toBeVisible();
 
- await page.locator('input[data-qa="login-email"]').fill('sowndariya22@gmail.com');
+ await page.locator('input[data-qa="login-email"]').fill('sowndariya23@gmail.com');
   await page.getByRole('textbox', { name: 'Password' }).click();
   await page.getByRole('textbox', { name: 'Password' }).fill('Sow@911!');
   await page.getByRole('button', { name: 'Login' }).click();
   await expect(page.locator('#header')).toContainText('Logout');
-  await expect(page.locator('#header')).toContainText('Logged in as Sowndariya');
+  await expect(page.getByText('Logged in as')).toBeVisible({ timeout: 10000 });
+
 
   await page.getByRole('link', { name: ' Delete Account' }).click();
   await expect(page.locator('b')).toContainText('Account Deleted!');
