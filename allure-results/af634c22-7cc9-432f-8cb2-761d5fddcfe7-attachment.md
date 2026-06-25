@@ -1,0 +1,53 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: logintestdemo.test.ts >> Login Test Demo
+- Location: tests\logintestdemo.test.ts:3:1
+
+# Error details
+
+```
+Error: browserContext.newPage: Target page, context or browser has been closed
+```
+
+# Test source
+
+```ts
+  1  | import { chromium, test } from "@playwright/test";
+  2  | 
+  3  | test("Login Test Demo", async () => {
+  4  |     const browser = await chromium.launch({
+  5  |         headless: false
+  6  |     });
+  7  | 
+  8  |     const context = await browser.newContext();
+> 9  |     const page = await context.newPage();
+     |                                ^ Error: browserContext.newPage: Target page, context or browser has been closed
+  10 | 
+  11 |     await page.goto("https://www.demoblaze.com/");//get url
+  12 |     await page.click("//a[@id='login2']");
+  13 |     await page.fill("//input[@id='loginusername']", "sowndariya");
+  14 |     await page.fill("//input[@id='loginpassword']", "Sow@911!");
+  15 |     await page.click("//button[text()='Log in']");
+  16 |     console.log("Page Current url: ",page.url());
+  17 |     console.log("Page title: ",await page.title());
+  18 |     const html=await page.content()
+  19 |     console.log("Page content: ",html.substring(0,300));
+  20 | 
+  21 |     await page.waitForTimeout(5000);
+  22 | 
+  23 |     const page1 = await context.newPage();
+  24 |     await page1.goto("https://www.demoblaze.com/cart.html");
+  25 |     await page1.waitForTimeout(5000);
+  26 |     console.log("Page Current url: ",page1.url());
+  27 |     console.log("Page title: ",await page1.title());
+  28 |     const html1=await page1.content()
+  29 |     console.log("Page content: ",html1.substring(0,300));
+  30 |     await browser.close();//quit browser
+  31 | });
+```
