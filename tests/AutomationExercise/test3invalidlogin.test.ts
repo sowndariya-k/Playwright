@@ -1,9 +1,6 @@
 import { chromium, test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
-    const browser = await chromium.launch({
-        headless: false
-    });
   await page.goto('https://automationexercise.com/');
   await expect(page.locator('#slider-carousel')).toContainText('AutomationExercise');
   await page.getByRole('link', { name: ' Signup / Login' }).click();
