@@ -1,0 +1,2 @@
+Dialog type: confirm
+Dialog message: Press OK to proceed!
