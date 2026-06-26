@@ -17,7 +17,7 @@ test('test', async ({ page }) => {
   await expect(page.getByText('Logged in as')).toBeVisible({ timeout: 10000 });
 
 
-  await page.getByRole('link', { name: ' Delete Account' }).click();
+  await page.getByRole('link', { name:' Delete Account' }).click();
   await expect(page.locator('b')).toContainText('Account Deleted!');
   await page.getByRole('link', { name: 'Continue' }).click();
   await expect(page.getByRole('link', { name: 'Website for automation' })).toBeVisible();
