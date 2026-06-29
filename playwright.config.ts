@@ -24,14 +24,13 @@ export default defineConfig({
 
   /* Reporter to use */
   reporter: [
-    ['list'],
-    ['html', { open: 'alwways' }],
-    ['allure-playwright'],
-  ],
+        ['list'],
+        ['html', { outputFolder: 'playwright-report' }],
+        ['allure-playwright']
+    ],
 
-  /* ✅ Single unified use block — removed duplicate */
   use: {
-    headless: true,       // ✅ Required for GitHub Actions CI
+    headless: true, 
     screenshot: 'on',
     video: 'on',
     trace: 'on',
