@@ -48,20 +48,24 @@ test("Sweet Alert", async ({ page }) => {
 
     await page.locator("//span[text()='Show']").nth(2).click();
 
-    await expect(page.locator(".ui-dialog-title")).toHaveText("Dialog");
+    await expect(page.getByText("Dialog", { exact: true }))
+    .toBeVisible();
 
     await page.getByRole("button", { name: "Dismiss" }).click();
 });
 
 test("Sweet Modal Dialog", async ({ page }) => {
+
     await page.goto("https://leafground.com/alert.xhtml");
 
     await page.locator("//span[text()='Show']").nth(3).click();
 
-    await expect(page.locator(".ui-dialog-title"))
-        .toHaveText("Modal Dialog (Sweet Alert)");
+    await expect(
+        page.getByText("Modal Dialog (Sweet Alert)", { exact: true })
+    ).toBeVisible();
 
     await page.keyboard.press("Escape");
+
 });
 
 test("Delete Confirmation", async ({ page }) => {
