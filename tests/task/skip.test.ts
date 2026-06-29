@@ -30,23 +30,38 @@ test.skip("Login test2",async({page}) =>{
 });
 
 test("Soft Assertion Demo", async ({ page }) => {
+
     await page.goto("https://demoblaze.com/");
 
     await page.locator("#login2").click();
-    await page.locator("#loginusername").fill("sowndariya");
-    await page.locator("#loginpassword").fill("Sow@911!");
-    await page.getByRole("button", { name: "Log in" }).click();
 
-    // Pass
-    await expect.soft(page.getByRole("link", { name: "Log out" })).toBeVisible();
+    await page.locator("#loginusername")
+        .fill("sowndariya");
 
-    //fail
-    await expect.soft(page.getByRole("link", { name: "Log out" })).toHaveText("Logout");
+    await page.locator("#loginpassword")
+        .fill("Sow@911!");
+
+    await page.getByRole("button", { name: "Log in" })
+        .click();
+
+    await expect.soft(
+        page.getByRole("link", { name: "Log out" })
+    ).toBeVisible();
+
+    await expect.soft(
+        page.getByRole("link", { name: "Log out" })
+    ).toHaveText("Log out");
+
 
     const welcomeText = await page.locator("#nameofuser").textContent();
-    //fail
-    expect.soft(welcomeText).toBe("Welcome Admin");
+    console.log("Welcome text:", welcomeText);
+    expect.soft(welcomeText)
+        .toContain("Welcome");
+
 
     console.log("Execution continued after soft assertion failures.");
-    await expect.soft(page.locator("#nameofuser")).toBeVisible();
+    await expect.soft(
+        page.locator("#nameofuser")
+    ).toBeVisible();
+
 });

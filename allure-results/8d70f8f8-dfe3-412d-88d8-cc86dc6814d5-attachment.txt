@@ -1,0 +1,4 @@
+sum1 value: 12
+sum2 value: 12
+Button count: 1
+Result text: 24
