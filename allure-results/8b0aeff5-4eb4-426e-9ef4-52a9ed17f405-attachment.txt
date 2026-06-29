@@ -1,0 +1,6 @@
+Current URL 1: https://www.demoblaze.com/
+Current URL 2: https://www.demoblaze.com/prod.html?idp_=1
+Current URL 3: https://www.demoblaze.com/
+Current URL 4: https://www.demoblaze.com/prod.html?idp_=1
+Current URL 5: https://www.demoblaze.com/prod.html?idp_=1
+Current URL 6: https://www.demoblaze.com/

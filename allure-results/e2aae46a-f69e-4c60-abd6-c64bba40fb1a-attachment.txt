@@ -1,0 +1,4 @@
+12
+12
+Before entering: 
+After entering: 24

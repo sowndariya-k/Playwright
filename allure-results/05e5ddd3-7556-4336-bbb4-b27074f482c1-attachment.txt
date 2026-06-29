@@ -1,0 +1,1 @@
+Before entering: locator('//input[@id="user-message"]')

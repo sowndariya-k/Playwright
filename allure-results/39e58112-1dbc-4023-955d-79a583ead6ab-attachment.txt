@@ -1,0 +1,2 @@
+First window url:  https://demoqa.com/browser-windows
+New window url:  https://demoqa.com/sample

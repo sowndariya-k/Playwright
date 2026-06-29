@@ -13,17 +13,14 @@ test('test', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Password' }).fill('Sow@911!');
   await page.getByRole('button', { name: 'Login' }).click();
 
-  // ✅ Wait longer for post-login navigation to complete
   await page.waitForLoadState('networkidle');
 
-  // ✅ Check if login failed (wrong credentials / account deleted)
   const loginError = page.locator('.login-form p[style*="color: red"]');
   const hasError = await loginError.isVisible().catch(() => false);
   if (hasError) {
     throw new Error('Login failed — account may have been deleted by a previous test run. Re-register first.');
   }
 
-  // ✅ Increase timeout for Logout to appear
   await expect(page.locator('#header')).toContainText('Logout', { timeout: 15000 });
   await expect(page.getByText('Logged in as')).toBeVisible({ timeout: 10000 });
 

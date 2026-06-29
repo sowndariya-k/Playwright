@@ -1,0 +1,3 @@
+Single click completed
+Double click completed
+Mouse moved

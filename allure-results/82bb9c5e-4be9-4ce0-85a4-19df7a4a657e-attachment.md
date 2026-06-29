@@ -1,0 +1,154 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: task\skip.test.ts >> Login test1
+- Location: tests\task\skip.test.ts:3:1
+
+# Error details
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator: getByRole('link', { name: 'Log out' })
+Expected: visible
+Timeout: 5000ms
+Error: element(s) not found
+
+Call log:
+  - Expect "toBeVisible" with timeout 5000ms
+  - waiting for getByRole('link', { name: 'Log out' })
+
+```
+
+```yaml
+- dialog "Log in":
+  - document:
+    - heading "Log in" [level=5]
+    - button "Close"
+    - text: "Username:"
+    - textbox: sowndariya
+    - text: "Password:"
+    - textbox: Sow@911!
+    - button "Close"
+    - button "Log in"
+- navigation:
+  - link "PRODUCT STORE":
+    - /url: index.html
+    - img
+    - text: PRODUCT STORE
+  - list:
+    - listitem:
+      - link "Home (current)":
+        - /url: index.html
+    - listitem:
+      - link "Contact":
+        - /url: "#"
+    - listitem:
+      - link "About us":
+        - /url: "#"
+    - listitem:
+      - link "Cart":
+        - /url: cart.html
+    - listitem:
+      - link "Log in":
+        - /url: "#"
+    - listitem
+    - listitem
+    - listitem:
+      - link "Sign up":
+        - /url: "#"
+  - list:
+    - listitem
+    - listitem
+    - listitem
+  - img "Second slide"
+  - button "Previous"
+  - button "Next"
+- link "CATEGORIES":
+  - /url: ""
+- link "Phones":
+  - /url: "#"
+- link "Laptops":
+  - /url: "#"
+- link "Monitors":
+  - /url: "#"
+- list:
+  - listitem:
+    - button "Previous"
+  - listitem:
+    - button "Next"
+- heading "About Us" [level=4]
+- paragraph: We believe performance needs to be validated at every stage of the software development cycle and our open source compatible, massively scalable platform makes that a reality.
+- heading "Get in Touch" [level=4]
+- paragraph: "Address: 2390 El Camino Real"
+- paragraph: "Phone: +440 123456"
+- paragraph: "Email: demo@blazemeter.com"
+- heading "PRODUCT STORE" [level=4]:
+  - img
+  - text: PRODUCT STORE
+- contentinfo:
+  - paragraph: Copyright © Product Store
+```
+
+# Test source
+
+```ts
+  1  | import {test, expect} from "@playwright/test"
+  2  | 
+  3  | test("Login test1",async({page}) =>{
+  4  |     await page.goto("https://demoblaze.com/");
+  5  |     await page.click("#login2")
+  6  |     await page.locator('#loginusername').fill('sowndariya');
+  7  |     await page.locator('#loginpassword').click();
+  8  |     await page.locator('#loginpassword').fill('Sow@911!');
+  9  |     await page.getByRole('button', { name: 'Log in' }).click();
+  10 |     
+> 11 |     await expect(page.getByRole("link",{name: "Log out"})).toBeVisible();
+     |                                                            ^ Error: expect(locator).toBeVisible() failed
+  12 |     await expect(page.getByRole("link",{name: "Log out"})).toHaveText("Log out");
+  13 |     const welcomeText=await page.locator("#nameofuser").textContent();
+  14 |     expect(welcomeText).toBe("Welcome sowndariya")
+  15 | });
+  16 | 
+  17 | test.skip("Login test2",async({page}) =>{
+  18 |     test.skip (true, "Module under development");
+  19 |     await page.goto("https://demoblaze.com/");
+  20 |     await page.click("#login2")
+  21 |     await page.locator('#loginusername').fill('sowndariya');
+  22 |     await page.locator('#loginpassword').click();
+  23 |     await page.locator('#loginpassword').fill('Sow@911!');
+  24 |     await page.getByRole('button', { name: 'Log in' }).click();
+  25 | 
+  26 |     await expect(page.getByRole("link",{name: "Log out"})).toBeVisible();
+  27 |     await expect(page.getByRole("link",{name: "Log out"})).toHaveText("Log out");
+  28 |     const welcomeText=await page.locator("#nameofuser").textContent();
+  29 |     expect(welcomeText).toBe("Welcome sowndariya")
+  30 | });
+  31 | 
+  32 | test("Soft Assertion Demo", async ({ page }) => {
+  33 |     await page.goto("https://demoblaze.com/");
+  34 | 
+  35 |     await page.click("#login2");
+  36 |     await page.locator("#loginusername").fill("sowndariya");
+  37 |     await page.locator("#loginpassword").fill("Sow@911!");
+  38 |     await page.getByRole("button", { name: "Log in" }).click();
+  39 | 
+  40 |     // Pass
+  41 |     await expect.soft(page.getByRole("link", { name: "Log out" })).toBeVisible();
+  42 | 
+  43 |     //fail
+  44 |     await expect.soft(page.getByRole("link", { name: "Log out" })).toHaveText("Logout");
+  45 | 
+  46 |     const welcomeText = await page.locator("#nameofuser").textContent();
+  47 |     //fail
+  48 |     expect.soft(welcomeText).toBe("Welcome Admin");
+  49 | 
+  50 |     console.log("Execution continued after soft assertion failures.");
+  51 |     await expect.soft(page.locator("#nameofuser")).toBeVisible();
+  52 | });
+```

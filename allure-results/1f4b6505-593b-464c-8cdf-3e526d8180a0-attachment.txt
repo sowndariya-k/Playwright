@@ -1,0 +1,6 @@
+Total pages open: 3
+Title: demosite | URL: https://demoqa.com/browser-windows
+Title:  | URL: https://demoqa.com/sample
+Title:  | URL: https://demoqa.com/sample
+Verified heading on: https://demoqa.com/sample
+Verified heading on: https://demoqa.com/sample
