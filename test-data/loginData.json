@@ -1,0 +1,23 @@
+[
+    {
+        "testName": "Valid Login",
+        "userName":"sowndariya",
+        "password":"Sow@911!",
+        "expectedResult": "Success",
+        "expectedMessage": "Welcome"
+    },
+    {
+        "testName": "Invalid Login",
+        "userName":"sowndariya",
+        "password":"Sow@911",
+        "expectedResult": "Failure",
+        "expectedMessage": "Wrong password."
+    },
+    {
+        "testName": "Blank Username",
+        "userName":"",
+        "password":"Sow@911!",
+        "expectedResult": "Failure",
+        "expectedMessage": "Please fill out Username and Password."
+    }
+]
